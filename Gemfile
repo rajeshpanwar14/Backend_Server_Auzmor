@@ -27,7 +27,7 @@ gem 'pry'
 
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
-
+gem 'rspec-rails'
 group :development do
   # Access an interactive console on exception pages or by calling 'console' anywhere in the code.
   gem 'web-console', '>= 3.3.0'
