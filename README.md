@@ -1,24 +1,209 @@
-# README
+# Project README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+This README document provides comprehensive instructions on setting up and running the application. It covers essential steps, including installing the required Ruby and Rails versions, checking versions, starting the Rails server and console, migrating the database, and running unit/integration tests using RSpec.
 
-Things you may want to cover:
 
-* Ruby version
+# Technology Stack
 
-* System dependencies
+- **Database**: PostgreSQL 14
+- **Caching**: Redis
+- **Testing**: RSpec
+- **Hosting**: AWS EC2 Instance
+- **API Testing**: Postman
 
-* Configuration
 
-* Database creation
 
-* Database initialization
+## Setup Instructions
 
-* How to run the test suite
+### Ruby Version
 
-* Services (job queues, cache servers, search engines, etc.)
+1. Install Ruby version 2.6.8:
 
-* Deployment instructions
+    ```bash
+    rbenv install 2.6.8
+    # or
+    rvm install 2.6.8
+    ```
 
-* ...
+2. Install JRuby version 9.3.3.0:
+
+    ```bash
+    rbenv install jruby-9.3.3.0
+    ```
+
+3. Install Rails version 6.0.6.1:
+
+    ```bash
+    gem install rails -v 6.0.6.1
+    ```
+
+### Verify Installed Versions
+
+- Check Rails version:
+
+    ```bash
+    rails -v
+    ```
+
+- Check Ruby version:
+
+    ```bash
+    ruby -v
+    ```
+
+## Start the Rails Server/Console:
+
+1. Start Rails server:
+
+    ```bash
+    rails s
+    # or 
+    rails s -p port_number
+    ```
+
+2. To Start Rails console:
+
+    ```bash
+    rails c
+    ```
+
+## Unit/Integration Testing:
+
+1. Install dependencies:
+
+    ```bash
+    gem 'rspec-rails'
+    # then run: 
+    bundle install
+    ```
+
+2. Generate RSpec configuration:
+
+    ```bash
+    rails generate rspec:install
+    ```
+
+3. Set the rails environment for test cases:
+
+    ```bash
+    rails db:environment:set RAILS_ENV=test
+    ```
+
+4. To execute all test cases:
+
+    ```bash
+    bundle exec rspec
+    ```
+
+5. To execute a specific file's test cases:
+
+    ```bash
+    bundle exec rspec spec/path/to/file_spec.rb
+    # or 
+    rspec
+    ```
+
+## Now we can test our APIs using Postman
+
+## For Basic authentication:
+
+- Change authorization in Postman to Basic Auth.
+- Then enter username and password:
+    - Username will be the username in the accounts table.
+    - Passwords will be auth_id.
+
+## Sample Curl 
+
+1. For Outbound:
+
+    ```bash
+    curl --location 'http://localhost:3000/outbound/sms' \
+    --header 'Authorization: Basic YXpyMToyMFMwS1BOT0lN' \
+    --form 'from="4924195509196"' \
+    --form 'to="312977281255"' \
+    --form 'text="STOP"'
+    ```
+
+2. For Inbound:
+
+    ```bash
+    curl --location 'http://localhost:3000/inbound/sms' \
+    --header 'Authorization: Basic YXpyMToyMFMwS1BOT0lN' \
+    --form 'from="4924195509196"' \
+    --form 'to="312977281255"' \
+    --form 'text="STOP"'
+    ```
+
+# Connecting to an EC2 Instance via SSH
+
+This guide will walk you through the process of connecting to an EC2 instance using SSH.
+
+## Setup The PEM File
+
+1. **Download PEM File:**
+   - Download the pem file.
+
+2. **Change File Permissions:**
+   - Open the terminal and navigate to the directory where the PEM file is located.
+   - Run the command:
+     ```bash
+     chmod 400 rajesh_ruby_2.pem
+     ```
+
+## Connect to the EC2 Instance
+
+3. **SSH Connection:**
+   - In the terminal, use the following command to connect to the EC2 instance:
+     ```bash
+     ssh -i "rajesh_ruby_2.pem" ubuntu@ec2-13-126-255-78.ap-south-1.compute.amazonaws.com
+     ```
+
+4. **First Connection Prompt:**
+   - Upon the first connection, a prompt will appear asking to add the key.
+   - **Do Not Skip.**
+   - Type "yes" and press Enter to proceed.
+
+
+## Important
+- **Security Precautions:**
+  - Please do not share the PEM file publicly.
+
+
+# EC2 Instance Terminal Management
+
+This guide outlines how to manage terminals on an EC2 instance where the server and Redis are running on different terminals.
+
+## Terminal Setup
+
+### Server Terminal (Terminal 0)
+The server is running on Terminal 0. Do not close this terminal.
+
+### Redis Terminal (Terminal 2)
+Redis is running on Terminal 2. Do not close this terminal.
+
+## Instructions
+1. **Switching Terminals:**
+   - Use `fn + F3` to cycle between the different terminals.
+   
+2. **Creating a New Terminal:**
+   - If you need an additional terminal, press `fn + F2`.
+   
+3. **Exiting a Terminal:**
+   - Ensure all running processes are stopped.
+   - Type `exit` and press `Enter` to close the terminal.
+
+4. **Disconnecting:**
+   - Press `fn + F6` to disconnect.
+   - Close the local terminal.
+
+## Notes
+- **Viewing Redis Logs:**
+  - Run `redis-cli` in the Redis terminal (Terminal 1).
+  - Type `KEYS *` and press `Enter` to view the keys in the Redis instance.
+
+- **Running Rails Console:**
+  - To run Rails console, use the command:
+    ```bash
+    rails c
+    ```
+  - This will start the Rails console for your application.
