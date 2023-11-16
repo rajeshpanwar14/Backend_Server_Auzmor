@@ -173,6 +173,15 @@ This guide will walk you through the process of connecting to an EC2 instance us
 
 This guide outlines how to manage terminals on an EC2 instance where the server and Redis are running on different terminals.
 
+## Connect To Byobu Session
+
+- **To Connect Or To Start A Byobu Session:**
+  - In Terminal, use the command:
+    ```bash
+    byobu
+    ```
+  - This will connect you to the existing session.
+
 ## Terminal Setup
 
 ### Server Terminal (Terminal 0)
