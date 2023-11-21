@@ -117,21 +117,21 @@ This README document provides comprehensive instructions on setting up and runni
 1. For Outbound:
 
     ```bash
-    curl --location 'http://localhost:3000/outbound/sms' \
-    --header 'Authorization: Basic YXpyMToyMFMwS1BOT0lN' \
-    --form 'from="4924195509196"' \
-    --form 'to="312977281255"' \
-    --form 'text="STOP"'
+    curl --location '13.126.255.78/outbound/sms' \
+    --header 'Authorization: Basic dXNlcl9vbmU6YXV0aDEyMw==' \
+    --form 'from="4924195509197"' \
+    --form 'to="4924195509197"' \
+    --form 'text="Hello World"'
     ```
 
 2. For Inbound:
 
     ```bash
-    curl --location 'http://localhost:3000/inbound/sms' \
-    --header 'Authorization: Basic YXpyMToyMFMwS1BOT0lN' \
-    --form 'from="4924195509196"' \
-    --form 'to="312977281255"' \
-    --form 'text="STOP"'
+    curl --location '13.126.255.78/inbound/sms' \
+    --header 'Authorization: Basic dXNlcl9vbmU6YXV0aDEyMw==' \
+    --form 'from="4924195509197"' \
+    --form 'to="4924195509197"' \
+    --form 'text="Hello World"'
     ```
 
 # Connecting to an EC2 Instance via SSH
